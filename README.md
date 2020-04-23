@@ -1,4 +1,5 @@
 # sso单点登录
+# 跨域、spring、jwt
 找到三个系统模块下OrgApplication.java文件，分别都run as->1java application  
 
 位置如下：
