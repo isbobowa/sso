@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" th:href="@{../css/normalize.css}" />
+<title>重大体育</title>
+</head>
+<body>
+<div class="login">
+	<h1>欢迎进入重大体育网</h1>
+    	<button type="submit" class="btn btn-primary btn-block btn-large" id="loginout">退出登录</button>
+</div>
+<script th:src="@{https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js}"></script>
+<script th:src="@{js/logout.js}"></script>
+<!-- 通过重定向实现跨域共享cookie -->
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    $(function () {
+        var params = [[${sendparam}]];
+        if (params == null) {
+            return;//中断执行
+        }
+        var arrDomain = params.cookieurl;
+        jQuery.each(arrDomain, function () {  // this 指定值
+            //循环访问
+            $.ajax({
+			/* 	格式:http://localhost:8082/jwc/addcookie?cookieName=……&cookieValue=……  */
+                url: this + "?cookieName=" + params.cookieName + "&cookieValue=" + params.cookieValue,
+                type: "get",
+                dataType: "jsonp" //指定服务器返回的数据类型
+            });
+        });
+    })
+    /*]]>*/
+</script>
+
+</body>
+</html>
